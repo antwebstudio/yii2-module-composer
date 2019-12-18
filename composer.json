@@ -1,0 +1,23 @@
+{
+    "name": "antweb/yii2-module-composer",
+    "description": "Composer plugin for antweb module",
+    "type": "composer-plugin",
+    "authors": [
+        {
+            "name": "Hui Yang",
+            "email": "chy1988@antwebstudio.com"
+        }
+    ],
+    "require": {
+        "composer-plugin-api": "^1.1"
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "class": "ant\\moduleManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+			"ant\\moduleManager\\" : "src"
+		}
+    }
+}
