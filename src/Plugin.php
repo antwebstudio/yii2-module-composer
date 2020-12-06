@@ -35,4 +35,12 @@ class Plugin implements PluginInterface
             file_put_contents($file, "<?php\n\nreturn [];\n");
         }
     }
+    
+    public function deactivate(Composer $composer, IOInterface $io) {
+
+    }
+    
+    public function uninstall(Composer $composer, IOInterface $io) {
+
+    }
 }
