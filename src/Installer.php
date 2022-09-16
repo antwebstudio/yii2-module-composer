@@ -34,13 +34,14 @@ class Installer extends \Composer\Installer\LibraryInstaller
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         // install the package the normal composer way
-        parent::install($repo, $package);
+        $promise = parent::install($repo, $package);
         // add the package to yiisoft/extensions.php
         $this->addPackage($package);
         // ensure the yii2-dev package also provides Yii.php in the same place as yii2 does
         /*if ($package->getName() == 'yiisoft/yii2-dev') {
             $this->linkBaseYiiFiles();
         }*/
+        return $promise;
     }
 
     /**
@@ -48,13 +49,14 @@ class Installer extends \Composer\Installer\LibraryInstaller
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
-        parent::update($repo, $initial, $target);
+        $promise = parent::update($repo, $initial, $target);
         $this->removePackage($initial);
         $this->addPackage($target);
         // ensure the yii2-dev package also provides Yii.php in the same place as yii2 does
         /*if ($initial->getName() == 'yiisoft/yii2-dev') {
             $this->linkBaseYiiFiles();
         }*/
+        return $promise;
     }
 
     /**
@@ -63,13 +65,14 @@ class Installer extends \Composer\Installer\LibraryInstaller
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         // uninstall the package the normal composer way
-        parent::uninstall($repo, $package);
+        $promise = parent::uninstall($repo, $package);
         // remove the package from yiisoft/extensions.php
         $this->removePackage($package);
         // remove links for Yii.php
         /*if ($package->getName() == 'yiisoft/yii2-dev') {
             $this->removeBaseYiiFiles();
         }*/
+        return $promise;
     }
 
     protected function addPackage(PackageInterface $package)
